@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AuctionController!{% endblock %}
+
+{% block body %}
+    
+    {% for auction in auctions %}
+        <h2><a href={{ url('auction_details', {"id": auction.id} )}}>{{ auction.title }}</a></h2>
+        <p>{{ auction.description }}</p>
+        <p>{{ auction.price }}</p>
+        <hr>
+    {% endfor %}
+
+{% endblock %}
