@@ -30,11 +30,11 @@ class AuctionController extends AbstractController
      * 
      * @Route("/auction/details/{id}", name="auction_details")
      * 
-     * @param $id
+     * @param Auction $auction
      */
-    public function detailsAction($id)
+    public function detailsAction(Auction $auction)
     {
-        return $this->render('auction/details.html.twig');
+        return $this->render('auction/details.html.twig', ['auction' => $auction]);
     }
 
     /**
