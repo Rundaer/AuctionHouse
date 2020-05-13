@@ -15,7 +15,7 @@ class AuctionController extends AbstractController
     /**
      * Index auctions, Shows all auctions
      * 
-     * @Route("/", name="auction_index")
+     * @Route("/auctions", name="auction_index")
      */
     public function indexAction()
     {
@@ -28,9 +28,11 @@ class AuctionController extends AbstractController
     /**
      * Details Action, shows details of certain auction
      * 
-     * @Route("/auction/details/{id}", name="auction_details")
+     * @Route("/auctions/details/{id}", name="auction_details")
      * 
      * @param Auction $auction
+     * 
+     * @return Response 
      */
     public function detailsAction(Auction $auction)
     {
@@ -40,7 +42,9 @@ class AuctionController extends AbstractController
     /**
      * Form to add auction
      * 
-     * @Route("/auction/add", name="auction_add")
+     * @Route("/auctions/add", name="auction_add")
+     * 
+     * @param Request $request
      * 
      * @return Response
      */
@@ -53,12 +57,44 @@ class AuctionController extends AbstractController
         if ($request->isMethod('post')){
             $form->handleRequest($request);
 
+            $auction
+                ->setCreatedAt(new \DateTime())
+                ->setUpdatedAt(new \DateTime())
+                ->setStatus(Auction::STATUS_ACTIVE);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($auction);
             $entityManager->flush();
 
-            return $this->redirectToRoute("auction_index");
+            return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
         }
         return $this->render('auction/add.html.twig', ["form" => $form->createView()]);
+    }
+
+    /**
+     * @Route("/auctions/edit/{id}", name="auction_edit")
+     * 
+     * @param Request $request
+     * @param Auction $auction 
+     * 
+     * @return Response
+     */
+    public function editAction(Request $request, Auction $auction)
+    {
+        $form = $this->createForm(AuctionType::class, $auction);
+
+        if ($request->isMethod("post")) {
+            $form->handleRequest($request);
+
+            $auction->setUpdatedAt(new \DateTime());
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($auction);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
+        }
+
+        return $this->render("auction/edit.html.twig", ["form" => $form->createView()]);
     }
 }
