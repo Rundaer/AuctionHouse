@@ -6,4 +6,6 @@
     <p>{{ auction.price }}</p>
 
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
+    <a class='button' href="{{ url('auction_edit', {'id':auction.id}) }}">Edytuj</a>
+    {{ form(deleteForm) }}
 {% endblock %}

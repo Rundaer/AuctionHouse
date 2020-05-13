@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Auction;
 use App\Form\AuctionType;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,7 +38,19 @@ class AuctionController extends AbstractController
      */
     public function detailsAction(Auction $auction)
     {
-        return $this->render('auction/details.html.twig', ['auction' => $auction]);
+        $deleteForm = $this->createFormBuilder()
+            ->setAction($this->generateUrl("auction_delete", ["id" => $auction->getId()]))
+            ->setMethod(Request::METHOD_DELETE)
+            ->add("submit", SubmitType::class, ["label" => "Usuń"])
+            ->getForm();
+
+        return $this->render(
+            'auction/details.html.twig',
+            [
+                'auction' => $auction, 
+                "deleteForm" => $deleteForm->createView()
+            ]
+        );
     }
 
     /**
@@ -95,7 +109,7 @@ class AuctionController extends AbstractController
     }
 
     /**
-     * @Route("auctions/delete/{id}", name="auction_delete")
+     * @Route("auctions/delete/{id}", name="auction_delete", methods="DELETE")
      */
     public function deleteAction(Auction $auction)
     {
