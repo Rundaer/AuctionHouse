@@ -58,8 +58,6 @@ class AuctionController extends AbstractController
             $form->handleRequest($request);
 
             $auction
-                ->setCreatedAt(new \DateTime())
-                ->setUpdatedAt(new \DateTime())
                 ->setStatus(Auction::STATUS_ACTIVE);
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -86,8 +84,6 @@ class AuctionController extends AbstractController
         if ($request->isMethod("post")) {
             $form->handleRequest($request);
 
-            $auction->setUpdatedAt(new \DateTime());
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($auction);
             $entityManager->flush();
@@ -96,5 +92,17 @@ class AuctionController extends AbstractController
         }
 
         return $this->render("auction/edit.html.twig", ["form" => $form->createView()]);
+    }
+
+    /**
+     * @Route("auctions/delete/{id}", name="auction_delete")
+     */
+    public function deleteAction(Auction $auction)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($auction);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("auction_index");
     }
 }
