@@ -44,11 +44,18 @@ class AuctionController extends AbstractController
             ->add("submit", SubmitType::class, ["label" => "Usuń"])
             ->getForm();
 
+        $finishForm = $this->createFormBuilder()
+            ->setAction($this->generateUrl("auction_finish", ["id" => $auction->getId()]))
+            ->setMethod(Request::METHOD_POST)
+            ->add("submit", SubmitType::class, ["label" => "Zakończ"])
+            ->getForm();
+
         return $this->render(
             'auction/details.html.twig',
             [
                 'auction' => $auction, 
-                "deleteForm" => $deleteForm->createView()
+                "deleteForm" => $deleteForm->createView(),
+                "finishForm" => $finishForm->createView()
             ]
         );
     }
@@ -109,7 +116,11 @@ class AuctionController extends AbstractController
     }
 
     /**
-     * @Route("auctions/delete/{id}", name="auction_delete", methods="DELETE")
+     * @Route("auctions/delete/{id}", name="auction_delete", methods={"DELETE"})
+     * 
+     * @param Auction $auction 
+     * 
+     * @return Response
      */
     public function deleteAction(Auction $auction)
     {
@@ -118,5 +129,25 @@ class AuctionController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute("auction_index");
+    }
+
+    /**
+     * @Route("auctions/finish/{id}", name="auction_finish", methods={"POST"})
+     * 
+     * @param Auction $auction 
+     * 
+     * @return Response
+     */
+    public function finishAction(Auction $auction)
+    {
+        $auction
+            ->setExpiresAt(new \DateTime())
+            ->setStatus(Auction::STATUS_FINISHED);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($auction);
+        $entityManager->flush();
+
+        return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
     }
 }
