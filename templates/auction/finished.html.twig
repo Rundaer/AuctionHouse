@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>{{ auction.title }}</h1>
+    <p>{{ auction.description }}</p>
+    <p>{{ auction.price }}</p>
+    <p>Zakończyła się {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
+
+
+    <a class='button' href="{{ url('auction_index') }}">Powrót</a>
+
+{% endblock %}

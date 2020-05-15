@@ -22,7 +22,7 @@ class AuctionController extends AbstractController
     public function indexAction()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $auctions = $entityManager->getRepository(Auction::class)->findAll();
+        $auctions = $entityManager->getRepository(Auction::class)->findBy(["status" => Auction::STATUS_ACTIVE]);
 
         return $this->render('auction/index.html.twig', ['auctions' => $auctions]);
     }
@@ -38,6 +38,9 @@ class AuctionController extends AbstractController
      */
     public function detailsAction(Auction $auction)
     {
+        if ($auction->getStatus() === Auction::STATUS_FINISHED)
+            return $this->render('auction/finished.html.twig', ["auction" => $auction]);
+
         $deleteForm = $this->createFormBuilder()
             ->setAction($this->generateUrl("auction_delete", ["id" => $auction->getId()]))
             ->setMethod(Request::METHOD_DELETE)

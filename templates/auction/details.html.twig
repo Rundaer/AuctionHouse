@@ -4,6 +4,8 @@
     <h1>{{ auction.title }}</h1>
     <p>{{ auction.description }}</p>
     <p>{{ auction.price }}</p>
+    <p>Aukcja kończy się {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
+
 
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
     <a class='button' href="{{ url('auction_edit', {'id':auction.id}) }}">Edytuj</a>
