@@ -16,4 +16,8 @@
         {{ form_widget(finishForm.submit, {"attr": {"class":"btn-alert"}}) }}
         {{ form_rest(finishForm) }}
     {{ form_end(finishForm) }}
+    {{ form_start(buyForm) }}
+        {{ form_widget(buyForm.submit, {"attr": {"class":"btn-success"}}) }}
+        {{ form_rest(buyForm) }}
+    {{ form_end(buyForm) }}
 {% endblock %}
