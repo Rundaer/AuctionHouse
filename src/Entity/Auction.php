@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Table(name="auctions")
  * @ORM\Entity(repositoryClass="App\Repository\AuctionRepository")
@@ -26,21 +26,51 @@ class Auction
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Tytuł nie może być pusty!"
+     * )
+     * @Assert\Length(
+     *      min=3,
+     *      max=255,
+     *      minMessage="Tytuł musi mieć więcej niż 3 znaki",
+     *      maxMessage="Tytuł nie moze miec więcej jak 255 znaków"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="Opis nie może być pusty!"
+     * )
+     * @Assert\Length(
+     *      min=10,
+     *      minMessage="Opis musi mieć więcej niż 10 znaki"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\NotBlank(
+     *      message="Cena nie może być pusta!"
+     * )
+     * @Assert\GreaterThan(
+     *      value="0",
+     *      message="Cena musi być większa od zera!"
+     * )
      */
     private $price;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
+     * @Assert\NotBlank(
+     *      message="Cena wywoławcza nie może być pusta!"
+     * )
+     * @Assert\GreaterThan(
+     *      value="0",
+     *      message="Cena wywoławcza musi być większa od zera!"
+     * )
      */
     private $startingPrice;
 
@@ -58,6 +88,13 @@ class Auction
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(
+     *      message="Musisz podać datę zakończenia aukcji!"
+     * )
+     * @Assert\GreaterThan(
+     *      value="+1 day",
+     *      message="Aukcja nie może kończyć się za mniej niż 24 godziny"
+     * )
      */
     private $expiresAt;
 

@@ -46,17 +46,21 @@ class OfferController extends AbstractController
 
         $bidForm->handleRequest($request);
 
-        $offer
-            ->setType(Offer::TYPE_BID)
-            ->setAuction($auction)
-        ;
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($offer);
-        $entityManager->flush();
-
-        $this->addFlash("success", "Zalicytowałeś aukcje");
-
+        if($bidForm->isValid()){
+            $offer
+                ->setType(Offer::TYPE_BID)
+                ->setAuction($auction)
+            ;
+    
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offer);
+            $entityManager->flush();
+    
+            $this->addFlash("success", "Zalicytowałeś aukcje");
+        } else {
+            $this->addFlash("error", "Nieudana licytacja");
+        }
+        
         return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
     }
 }

@@ -95,16 +95,21 @@ class AuctionController extends AbstractController
         if ($request->isMethod('post')){
             $form->handleRequest($request);
 
-            $auction
+            if($form->isValid()){
+                $auction
                 ->setStatus(Auction::STATUS_ACTIVE);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($auction);
-            $entityManager->flush();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($auction);
+                $entityManager->flush();
 
-            $this->addFlash("success", "Aukcja została dodana");
+                $this->addFlash("success", "Aukcja została dodana");
 
-            return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
+                return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
+            }
+
+            $this->addFlash("error", "Aukcja nie została dodana");
+            
         }
         return $this->render('auction/add.html.twig', ["form" => $form->createView()]);
     }
@@ -124,13 +129,18 @@ class AuctionController extends AbstractController
         if ($request->isMethod("post")) {
             $form->handleRequest($request);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($auction);
-            $entityManager->flush();
+            if($form->isValid()){
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($auction);
+                $entityManager->flush();
+    
+                $this->addFlash("success", "Aukcja została edytowana");
+    
+                return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
+            } 
 
-            $this->addFlash("success", "Aukcja została edytowana");
-
-            return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
+            $this->addFlash("error", "Aukcja nie została edytowana");
+            
         }
 
         return $this->render("auction/edit.html.twig", ["form" => $form->createView()]);
