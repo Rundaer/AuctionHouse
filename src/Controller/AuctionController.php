@@ -88,6 +88,8 @@ class AuctionController extends AbstractController
      */
     public function addAction(Request $request)
     {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+
         $auction = new Auction();
 
         $form = $this->createForm(AuctionType::class, $auction);
