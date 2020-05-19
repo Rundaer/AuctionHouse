@@ -2,11 +2,11 @@
 
 {% block body %}
     <h1>{{ auction.title }}</h1>
-    <p>{{ auction.description }}</p>
-    <p>{{ auction.price }}</p>
+    <p>Opis: {{ auction.description }}</p>
+    <p>Cena: {{ auction.price }}</p>
     <p>Aukcja kończy się {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
 
-
+    {# Options #}
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
     <a class='button' href="{{ url('auction_edit', {'id':auction.id}) }}">Edytuj</a>
 
@@ -14,13 +14,24 @@
         {{ form_widget(deleteForm.submit, {"attr": {"class":"btn-danger"}}) }}
         {{ form_rest(deleteForm) }}
     {{ form_end(deleteForm) }}
+
     {{ form_start(finishForm) }}
         {{ form_widget(finishForm.submit, {"attr": {"class":"btn-alert"}}) }}
         {{ form_rest(finishForm) }}
     {{ form_end(finishForm) }}
+
     {{ form_start(buyForm) }}
         {{ form_widget(buyForm.submit, {"attr": {"class":"btn-success"}}) }}
         {{ form_rest(buyForm) }}
     {{ form_end(buyForm) }}
+
     {{ form(bidForm) }}
+
+
+    {# Offers #}
+    <div>
+        {% for offer in auction.offers %}
+            <p>Oferta {{ offer.price }}, złożona {{ offer.createdAt | date("Y-m-d H:i:s")}}</p>
+        {% endfor %}
+    </div>
 {% endblock %}
