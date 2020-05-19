@@ -14,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Offer
 {
     const TYPE_BUY = "buy";
+    const TYPE_BID = "bid";
     const TYPE_AUCTION = "auction";
 
     /**
