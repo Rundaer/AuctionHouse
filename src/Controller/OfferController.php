@@ -47,12 +47,23 @@ class OfferController extends AbstractController
         $bidForm->handleRequest($request);
 
         if($bidForm->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+
+            $lastOffer = $entityManager
+                ->getRepository(Offer::class)
+                ->findOneBy(["auction" => $auction], ["createdAt" => "DESC"]);
+
+            if(isset($lastOffer)){
+                if($offer->getPrice() <= $lastOffer->getPrice()){
+                    $this->addFlash("error", "Oferta nie może być niższa niż {$lastOffer->getPrice()} zł");
+                    return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]); 
+                }
+            }
+
             $offer
                 ->setType(Offer::TYPE_BID)
-                ->setAuction($auction)
-            ;
-    
-            $entityManager = $this->getDoctrine()->getManager();
+                ->setAuction($auction);
+
             $entityManager->persist($offer);
             $entityManager->flush();
     

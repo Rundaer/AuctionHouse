@@ -27,11 +27,6 @@ class Offer
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=2)
-     */
-    private $price;
-
-    /**
-     * @ORM\Column(type="string", length=10)
      * @Assert\NotBlank(
      *      message="Cena nie może być pusta!"
      * )
@@ -39,6 +34,11 @@ class Offer
      *      value="0",
      *      message="Cena musi być większa od zera"
      * )
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="string", length=10)
      */
     private $type;
 
