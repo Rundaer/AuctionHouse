@@ -59,6 +59,12 @@ class Offer
      */
     private $auction;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +126,18 @@ class Offer
     public function setAuction(?Auction $auction): self
     {
         $this->auction = $auction;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
