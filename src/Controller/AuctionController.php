@@ -102,6 +102,8 @@ class AuctionController extends AbstractController
             $entityManager->persist($auction);
             $entityManager->flush();
 
+            $this->addFlash("success", "Aukcja została dodana");
+
             return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
         }
         return $this->render('auction/add.html.twig', ["form" => $form->createView()]);
@@ -126,6 +128,8 @@ class AuctionController extends AbstractController
             $entityManager->persist($auction);
             $entityManager->flush();
 
+            $this->addFlash("success", "Aukcja została edytowana");
+
             return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
         }
 
@@ -144,6 +148,8 @@ class AuctionController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($auction);
         $entityManager->flush();
+
+        $this->addFlash("success", "Aukcja została usunięta");
 
         return $this->redirectToRoute("auction_index");
     }
@@ -164,6 +170,8 @@ class AuctionController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($auction);
         $entityManager->flush();
+
+        $this->addFlash("success", "Aukcja została zakończona");
 
         return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
     }

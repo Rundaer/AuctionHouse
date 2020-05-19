@@ -7,7 +7,6 @@ use App\Entity\Offer;
 use App\Form\BidType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class OfferController extends AbstractController
@@ -32,6 +31,8 @@ class OfferController extends AbstractController
         $entityManager->persist($offer);
         $entityManager->flush();
 
+        $this->addFlash("success", "Kupiłeś przedmiot");
+
         return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
     }
 
@@ -53,6 +54,8 @@ class OfferController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($offer);
         $entityManager->flush();
+
+        $this->addFlash("success", "Zalicytowałeś aukcje");
 
         return $this->redirectToRoute("auction_details", ["id" => $auction->getId()]);
     }
