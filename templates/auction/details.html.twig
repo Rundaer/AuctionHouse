@@ -9,15 +9,21 @@
     {# Options #}
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
 
-    {{ form_start(buyForm) }}
-        {{ form_widget(buyForm.submit, {"attr": {"class":"btn-success"}}) }}
-        {{ form_rest(buyForm) }}
-    {{ form_end(buyForm) }}
+    {% if is_granted("ROLE_USER") %}
+        {{ form_start(buyForm) }}
+            {{ form_widget(buyForm.submit, {"attr": {"class":"btn-success"}}) }}
+            {{ form_rest(buyForm) }}
+        {{ form_end(buyForm) }}
 
-    {{ form(bidForm, {"attr": {"novalidate": "novalidate"}}) }}
+        {{ form(bidForm, {"attr": {"novalidate": "novalidate"}}) }}
+    {% endif %}
+
+    {% if not is_granted("ROLE_USER") %}
+        <p>Musisz być zalogowany żeby móc kupić</p>
+    {% endif %}
 
 
-    {# Offers #}
+    {# Display Offers #}
     <div>
         {% for offer in auction.offers %}
             <p>Oferta {{ offer.price }}, złożona {{ offer.createdAt | date("Y-m-d H:i:s")}}</p>

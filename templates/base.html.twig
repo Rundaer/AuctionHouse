@@ -9,6 +9,12 @@
     </head>
     <body>
 
+        {% if is_granted("ROLE_USER") %}
+            {% include("menuLogged.html.twig") %}
+        {% else %}
+            {% include("menuAnonymous.html.twig") %}
+        {% endif %}
+
         {# Wiadomości FlashMessage #}
         {% for message in app.flashes("success") %}
             <p>{{ message }}</p>

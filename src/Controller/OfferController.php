@@ -18,6 +18,8 @@ class OfferController extends AbstractController
      */
     public function buyAction(Auction $auction)
     {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+
         $offer = new Offer();
         $offer
             ->setAuction($auction)
@@ -41,6 +43,8 @@ class OfferController extends AbstractController
      */
     public function bidAction(Request $request, Auction $auction)
     {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+
         $offer = new Offer();
         $bidForm = $this->createForm(BidType::class, $offer);
 

@@ -174,7 +174,7 @@ class MyAuctionController extends AbstractController
     }
 
     /**
-     * @Route("my/auction/finish/{id}", name="auction_finish", methods={"POST"})
+     * @Route("my/auction/finish/{id}", name="my_auction_finish", methods={"POST"})
      * 
      * @param Auction $auction 
      * 
