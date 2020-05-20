@@ -41,18 +41,6 @@ class AuctionController extends AbstractController
         if ($auction->getStatus() === Auction::STATUS_FINISHED)
             return $this->render('auction/finished.html.twig', ["auction" => $auction]);
 
-        $deleteForm = $this->createFormBuilder()
-            ->setAction($this->generateUrl("auction_delete", ["id" => $auction->getId()]))
-            ->setMethod(Request::METHOD_DELETE)
-            ->add("submit", SubmitType::class, ["label" => "Usuń"])
-            ->getForm();
-
-        $finishForm = $this->createFormBuilder()
-            ->setAction($this->generateUrl("auction_finish", ["id" => $auction->getId()]))
-            ->setMethod(Request::METHOD_POST)
-            ->add("submit", SubmitType::class, ["label" => "Zakończ"])
-            ->getForm();
-
         $buyForm = $this->createFormBuilder()
             ->setAction($this->generateUrl("offer_buy", ["id" => $auction->getId()]))
             ->setMethod(Request::METHOD_POST)
@@ -69,8 +57,6 @@ class AuctionController extends AbstractController
             'auction/details.html.twig',
             [
                 'auction' => $auction, 
-                "deleteForm" => $deleteForm->createView(),
-                "finishForm" => $finishForm->createView(),
                 "buyForm" => $buyForm->createView(),
                 "bidForm" => $bidForm->createView(),
             ]

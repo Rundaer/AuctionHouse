@@ -8,17 +8,6 @@
 
     {# Options #}
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
-    <a class='button' href="{{ url('auction_edit', {'id':auction.id}) }}">Edytuj</a>
-
-    {{ form_start(deleteForm) }}
-        {{ form_widget(deleteForm.submit, {"attr": {"class":"btn-danger"}}) }}
-        {{ form_rest(deleteForm) }}
-    {{ form_end(deleteForm) }}
-
-    {{ form_start(finishForm) }}
-        {{ form_widget(finishForm.submit, {"attr": {"class":"btn-alert"}}) }}
-        {{ form_rest(finishForm) }}
-    {{ form_end(finishForm) }}
 
     {{ form_start(buyForm) }}
         {{ form_widget(buyForm.submit, {"attr": {"class":"btn-success"}}) }}
