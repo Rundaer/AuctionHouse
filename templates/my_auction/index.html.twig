@@ -4,6 +4,7 @@
 
 {% block body %}
     
+    {# Lista moich aukcji #}
     {% for auction in auctions %}
         <h2><a href={{ url('my_auction_details', {"id": auction.id} )}}>{{ auction.title }}</a></h2>
         <p>opis: {{ auction.description }}</p>

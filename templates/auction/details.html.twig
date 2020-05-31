@@ -1,12 +1,14 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+
+    {# Dane aukcji #}
     <h1>{{ auction.title }}</h1>
     <p>Opis: {{ auction.description }}</p>
     <p>Cena: {{ auction.price }}</p>
     <p>Aukcja kończy się {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
 
-    {# Options #}
+    {# Opcje przyciski #}
     <a class='button' href="{{ url('auction_index') }}">Powrót</a>
 
     {% if is_granted("ROLE_USER") %}
@@ -23,7 +25,7 @@
     {% endif %}
 
 
-    {# Display Offers #}
+    {# Pokazywanie ofert które zostały złożone na aukcje #}
     <div>
         {% for offer in auction.offers %}
             <p>Oferta {{ offer.price }}, złożona {{ offer.createdAt | date("Y-m-d H:i:s")}}</p>
