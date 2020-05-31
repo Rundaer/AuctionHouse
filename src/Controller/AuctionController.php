@@ -39,7 +39,7 @@ class AuctionController extends AbstractController
     public function detailsAction(Auction $auction)
     {
         if ($auction->getStatus() === Auction::STATUS_FINISHED)
-            return $this->render('auction/finished.html.twig', ["auction" => $auction]);
+            return $this->render('my_auction/finished.html.twig', ["auction" => $auction]);
 
         $buyForm = $this->createFormBuilder()
             ->setAction($this->generateUrl("offer_buy", ["id" => $auction->getId()]))

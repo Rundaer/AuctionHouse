@@ -24,9 +24,13 @@ class OfferController extends AbstractController
         $offer
             ->setAuction($auction)
             ->setType(Offer::TYPE_BUY)
-            ->setPrice($auction->getPrice());
+            ->setPrice($auction->getPrice())
+            ->setOwner($this->getUser());
 
-        $auction->setStatus(Auction::STATUS_FINISHED);
+        $auction
+            ->setStatus(Auction::STATUS_FINISHED)
+            ->setExpiresAt(new \DateTime());
+            
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($auction);
@@ -39,7 +43,7 @@ class OfferController extends AbstractController
     }
 
     /**
-     * @Route("auctions/bid/{id}", name="offer_bid", methods={"post"})
+     * @Route("auctions/bid/{id}", name="offer_bid", methods={"POST"})
      */
     public function bidAction(Request $request, Auction $auction)
     {
@@ -66,7 +70,8 @@ class OfferController extends AbstractController
 
             $offer
                 ->setType(Offer::TYPE_BID)
-                ->setAuction($auction);
+                ->setAuction($auction)
+                ->setOwner($this->getUser());;
 
             $entityManager->persist($offer);
             $entityManager->flush();
