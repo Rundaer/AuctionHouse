@@ -1,7 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-
+    <div class="addAuctionK">
+     <h1 class="h3 mb-3 font-weight-normal">Aukcja zakończona!</h1>
     {# Informacje o zakończonej aukcji #}
     <h1>{{ auction.title }}</h1>
     <p>{{ auction.description }}</p>
@@ -9,6 +10,6 @@
     <p>Zakończyła się {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
 
 
-    <a class='button' href="{{ url('my_auction_index') }}">Powrót</a>
-
+    <a href="{{ url('my_auction_index') }}">Powrót</a>
+    </div>
 {% endblock %}
