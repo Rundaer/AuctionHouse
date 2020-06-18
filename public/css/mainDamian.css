@@ -1,3 +1,33 @@
-.container{
-    max-width: 1200px;
+
+.container_auc{
+    margin-top: 20px;
+    padding: 20px;
+    border: #343A40;
+    background-color: white;
+    border-style: solid;
+    font-family: Arial, Helvetica, sans-serif;
+    border-width: 1px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+.tlo_damian{
+    background-color: lightgray;
+}
+
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    
+}
+
+.auk1{
+    color: #D10F0F;
+}
+
+.auk1:hover{
+    
+    color: #343A40;
 }

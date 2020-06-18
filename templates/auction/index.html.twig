@@ -4,14 +4,19 @@
 
 {% block body %}
     
+    
     {# Lista aukcji #}
     {% for auction in auctions %}
-        <h2><a href={{ url('auction_details', {"id": auction.id} )}}>{{ auction.title }}</a></h2>
+    <div class="container_auc">
+        <h2><a class="auk1" href={{ url('auction_details', {"id": auction.id} )}}>{{ auction.title }}</a></h2>
+        
         <p>opis: {{ auction.description }}</p>
         <p>cena: {{ auction.price }}</p>
         <p>cena wywoławca {{ auction.startingPrice }}</p>
         <p>Koniec: {{ auction.expiresAt | date("Y-m-d H:i:s") }}</p>
-        <hr>
+    </div>   
     {% endfor %}
+    
 
 {% endblock %}
+
