@@ -17,6 +17,9 @@
     max-width: 400px;
     padding: 20px;
     margin: 0 auto;
+    background-color: grey;
+    color: white;
+    border-radius: 15px;
   }
   .addAuctionK{
     text-align: center;
@@ -24,9 +27,18 @@
     max-width: 400px;
     padding: 20px;
     margin: 0 auto;
-
+    background-color: grey;
+    color: white;
+    border-radius: 15px;
   }
-  .addAuctionK a{
-      text-decoration: none;
-      color: red;
+  .indexSite{
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: grey;
+    color: white;
+    border-radius: 15px;
   }
+ 
