@@ -10,13 +10,23 @@
 }
 
 .loginK{
-    text-align: center;
-   
-    
+    text-align: center;  
 }
 .form-signin {
     width: 100%;
     max-width: 400px;
     padding: 20px;
     margin: 0 auto;
+  }
+  .addAuctionK{
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
+
+  }
+  .addAuctionK a{
+      text-decoration: none;
+      color: red;
   }
