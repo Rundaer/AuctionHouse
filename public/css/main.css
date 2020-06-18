@@ -1,4 +1,14 @@
+*{
+    padding: 0;
+    margin: 0; 
+}
 .testTitle{
     font-size: 2rem;
     color: red;
+}
+.myMenuBar li a
+{
+    background: rgb(240, 97, 1);
+    font-weight: bolder;
+    color: white;
 }

@@ -1,5 +1,23 @@
-<ul style="display:flex;list-style: none;">
-    <li style="padding: 10px"><a href="{{ url("auction_index") }}">Aukcje</a></li>
-    <li style="padding: 10px"><a href="{{ url("fos_user_security_login") }}">Zaloguj się</a></li>
-    <li style="padding: 10px"><a href="{{ url("fos_user_registration_register") }}">Zarejestruj sie</a></li>
-</ul>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ url("home_index") }}"><img src="https://files.tinypic.pl/i/01008/ymg1sk2fmw0h.png" width="30" height="30" class="d-inline-block align-top" alt="">Aukcje 24/7</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url("auction_index") }}">Aukcje</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url("fos_user_security_login") }}">Zaloguj</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{{ url("fos_user_registration_register") }}">Rejestracja</a>
+      </li>
+     
+     
+    </ul>
+  </div>
+</nav>
