@@ -1,13 +1,12 @@
 
 .container_auc{
     margin-top: 20px;
-    padding: 20px;
     border: #343A40;
     background-color: white;
-    border-style: solid;
+    
     font-family: Arial, Helvetica, sans-serif;
-    border-width: 1px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 15px;
 }
 
 
@@ -20,6 +19,7 @@ h2{
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     text-decoration: none;
+    font-weight: bold;
     
 }
 
@@ -30,4 +30,52 @@ h2{
 .auk1:hover{
     
     color: #343A40;
+}
+
+.col1{
+    
+    text-transform: uppercase;
+    font-weight: bold;
+    
+   
+}
+
+.ob1{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.baner0{
+    background-color: #808080;
+    padding: 10px 20px 2px 20px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.baner1{
+    padding: 10px 20px 2px 20px;
+}
+
+.baner2{
+    padding: 0px 20px 2px 20px;
+    background-color: #808080;
+    color: white;
+    border-radius: 0px 0px 15px 15px;
+}
+
+
+.pole0{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.pole1{
+    text-align: left;
+}
+
+.pole01{
+    text-align: justify;
+}
+
+.pole11{
+    text-align: left;
 }
